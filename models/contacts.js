@@ -30,7 +30,6 @@ var contacts = new Schema(
     finger_print:{
       type:String,
       required:true
-
     },
     created_at:{
       type:String
