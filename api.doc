@@ -18,9 +18,6 @@ RESPONSE: {
         "mobile":String (Optional),
         "first_name":String,
         "last_name":String,
-        "auth":String,
-        "device_token":String,
-        "finger_print":String
             "_id": timestamp,
             "created_at": timestamp,
             "__v": integer
