@@ -4,7 +4,7 @@ var router = express.Router();
 var mongoose =  require('mongoose');
 var fs = require("fs");
 var ContactModel = require("../models/contacts");
-
+var validator = require("email-validator");
 
 //let login user => UserA
 let name = "UserA";
@@ -49,15 +49,21 @@ router.use(checkAuth);
 //save contact
 router.post("/addContact",function (req,res) {
   let contact = req.body;
-   
-  ContactModel.addContact(contact, (error,doc) => {
-    if(!error){
-      res.json({statusCode:200,message:"Success",data:doc});
-    }
-    else{
-      res.json(error);
-    }
-  });
+
+  if(validator.validate(contact.email)){ // true
+
+    ContactModel.addContact(contact, (error,doc) => {
+      if(!error){
+        res.json({statusCode:200,message:"Success",data:doc});
+      }
+      else{
+        res.json(error);
+      }
+    });
+  }else{
+    //return unvalid mail
+    res.json({message:"unvalid email"});
+  }
 });
 
 //get all contact with pagging 

@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var uniqueValidator = require('mongoose-unique-validator');
 
 //ORM Mapping
 var Schema = mongoose.Schema;
@@ -14,10 +15,12 @@ var contacts = new Schema(
     },
     email:{
       type:String,
-      required:true
+      required:true,
+      unique:true
     },
     mobile:{
-      type:Number
+      type:Number,
+      unique:true
     },
     auth:{
       type:String,
@@ -35,6 +38,8 @@ var contacts = new Schema(
       type:String
     }
   });
+
+contacts.plugin(uniqueValidator);
 
 //Model Register
 mongoose.model("contacts",contacts);
