@@ -50,8 +50,18 @@ router.use(checkAuth);
 router.post("/addContact",function (req,res) {
   let contact = req.body;
 
-  if(validator.validate(contact.email)){ // true
-
+  //email validation
+  if(!validator.validate(contact.email)){ // true
+       //return unvalid mail
+    res.json({message:"unvalid email"});
+  
+  }//phone number validation
+  else if (! /^\d{11}$/.test(contact.mobile)) {
+     //return unvalid mail
+     res.json({message:"unvalid mobile number - should be 11 numbers"});
+  }
+  else{
+   
     ContactModel.addContact(contact, (error,doc) => {
       if(!error){
         res.json({statusCode:200,message:"Success",data:doc});
@@ -60,9 +70,6 @@ router.post("/addContact",function (req,res) {
         res.json(error);
       }
     });
-  }else{
-    //return unvalid mail
-    res.json({message:"unvalid email"});
   }
 });
 
