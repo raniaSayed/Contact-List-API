@@ -19,6 +19,18 @@ var contacts = new Schema(
     mobile:{
       type:Number
     },
+    auth:{
+      type:String,
+      required:true
+    }, 
+    device_token:{
+      type:String,
+      required:true
+    }, 
+    finger_print:{
+      type:String,
+      required:true
+    },
     created_at:{
       type:String
     }
